@@ -74,9 +74,9 @@ const StaffData = () => {
           </tr>
         </thead>
         <tbody>
-          {staffs.map((staff) => (
+          {staffs.map((staff, index) => (
             <tr key={staff.id}>
-              <td>1</td>
+              <td>{index + 1}</td>
               {/* <td>
               <Image />
               <p>buat foto</p>
