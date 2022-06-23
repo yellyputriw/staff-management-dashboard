@@ -56,17 +56,24 @@ button:hover {
 
 header {
   background-color: #038ade;
-  color: #fff;
   padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+header p {
+  margin: 0;
+  color: #fff;
   font-size: 20px;
 }
 
 aside {
   flex: 20%;
   background-color: #222;
+  color: #fff;
 }
 
-.dashboard-body {
+.app-body {
   flex: 80%;
   background-color: #fff;
   min-height: 530px;
