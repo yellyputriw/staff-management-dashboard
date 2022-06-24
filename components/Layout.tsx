@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import Head from "next/head";
+import Link from "next/link";
 
 interface LayoutProps {
   title: string;
@@ -15,29 +16,42 @@ export default function Layout(props: LayoutProps) {
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <header>{title}</header>
+      <header>
+        <p>Selamat datang di Aplikasi Manajemen Pegawai</p>
+        <p>
+          Anda Login sebagain <span>Admin</span>!
+        </p>
+      </header>
       <main>
         <div className="container">
           <aside>
             <ul>
               <li>
-                <a>Dashboard</a>
+                <Link href="/">
+                  <a>Dashboard</a>
+                </Link>
               </li>
               <li>
-                <a>Data Pegawai</a>
+                <Link href="/">
+                  <a>Data Pegawai</a>
+                </Link>
               </li>
               <li>
-                <a>Logout</a>
+                <Link href="/">
+                  <a>Data Jabatan</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
+                  <a>Logout</a>
+                </Link>
               </li>
             </ul>
           </aside>
-          <section className="dashboard-body">
-            <h1>Selamat datang di Aplikasi Manajemen Pegawai</h1>
-            <p>
-              Anda Login sebagain <span>Admin</span>!
-            </p>
-            <div>{children}</div>
-          </section>
+          <div className="app-body">
+            <h1>{title}</h1>
+            {children}
+          </div>
         </div>
       </main>
       <footer>Copyright</footer>
