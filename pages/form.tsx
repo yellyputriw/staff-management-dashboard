@@ -25,19 +25,14 @@ const Form: NextPage = () => {
         birthDate: birthDate,
         department: department,
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        alert("Berhasil Tambah Data");
+        window.location.href = "/";
+      })
       .catch((err) => console.log(err));
-
-    alert("Berhasil Tambah Data");
   };
 
-  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    console.log(`nama: ${name}`);
-    console.log(`ttl: ${birthDate}`);
-    console.log(`jenis kelamin: ${gender}`);
-    console.log(`department: ${department}`);
-  };
   return (
     <Layout title="Tambah Data" pageTitle="Tambah Data">
       <h2 className="judul">Tambah Pegawai</h2>

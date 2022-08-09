@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios, { CancelTokenSource } from "axios";
 import Link from "next/link";
 
@@ -15,24 +15,13 @@ const defaultStaff: IStaff[] = [];
 const StaffData = () => {
   const [staffs, setStaffs]: [IStaff[], (staffs: IStaff[]) => void] =
     React.useState(defaultStaff);
+  const [deleteStaff, setDeleteStaff] = useState(defaultStaff);
 
   const [loading, setLoading]: [boolean, (loading: boolean) => void] =
     React.useState<boolean>(true);
 
   const [error, setError]: [string, (error: string) => void] =
     React.useState("");
-
-  const cancelToken = axios.CancelToken; //create cancel token
-  const [cancelTokenSource, setCancelTokenSource]: [
-    CancelTokenSource,
-    (cancelTokenSource: CancelTokenSource) => void
-  ] = React.useState(cancelToken.source());
-
-  const handleCancelClick = () => {
-    if (cancelTokenSource) {
-      cancelTokenSource.cancel("User cancelled operation");
-    }
-  };
 
   useEffect(() => {
     axios
@@ -53,6 +42,23 @@ const StaffData = () => {
         setLoading(false);
       });
   }, []);
+
+  const handleDelete = (staff: IStaff): void => {
+    axios
+      .delete(`https://62a168a2cd2e8da9b0f0a49a.mockapi.io/staff/${staff.id}`)
+      .then((result) => {
+        alert("Berhasil hapus data!");
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
+
+    // alert("Berhasil Tambah Data");
+    setDeleteStaff(
+      deleteStaff.filter((staff) => {
+        return staff.id !== staff.id;
+      })
+    );
+  };
 
   return (
     <div className="table">
@@ -88,7 +94,14 @@ const StaffData = () => {
               <td>-</td>
               <td>
                 <button className="btn edit">Edit</button>
-                <button className="btn delete">Hapus</button>
+                <button
+                  className="btn delete"
+                  onClick={() => {
+                    handleDelete(staff);
+                  }}
+                >
+                  Hapus
+                </button>
               </td>
             </tr>
           ))}
